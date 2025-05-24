@@ -1,0 +1,31 @@
+{
+    "name": "Estacion 90s",
+    "short_name": "Estacion 90s",
+    "start_url": "https://estacion90sradio.com",
+    "display": "standalone",
+    "background_color": "#3c3c3c",
+    "theme_color": "#3c3c3c",
+    "description": "Escucha tu radio favorita en cualquier lugar.",
+    "icons": [
+        {
+            "src": "imagenes/app.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "imagenes/app.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        },
+        {
+            "src": "imagenes/app.png",
+            "sizes": "72x72",
+            "type": "image/png"
+        },
+        {
+            "src": "imagenes/app.png",
+            "sizes": "96x96",
+            "type": "image/png"
+        }
+    ]
+}

@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emisora Comunitaria Nasa Stereo</title>
+    <meta name="theme-color" content="#59bc10" />
+    <meta property="og:image:width" content="600" />
+        <meta property="og:image:height" content="360" />
+    <link rel="shortcut icon" type="image/x-icon" href="imagenes/logo.png" />
+    <link rel="stylesheet" type="text/css" href="styles.css">
+
+    <link href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgVfgYQa-Not2csZDUK-g9yhW7Aj0WlA5m0NXB5Wi2c1l5L9g0RWluex0nQDKdxEYFG6ZvGtQ-tAVIEFexnYwcwld5WzpGFnFJpv8L7DAp3MAcFN7fsFsGB3hka08ZYDgRmP3xvUGdm6skfm8bkAX0eFFnq99_bFlGOAQGEJIismv1uxQZTBQ_n9W7kOBVI/s150/logo%20para%20pagina.png" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+    </style>
+    
+    <!-- Link to the manifest file -->
+    <link rel="manifest" href="manifest.json">
+    
+    <style>
+        /* Estilo para el video */
+        video {
+            position: fixed; 
+            top: 0;
+            left: 0;
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover; 
+            z-index: -1; 
+        }
+
+        /* Estilo para la imagen de fondo */
+        .background-image {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEig6n3xk37Qt-TOJB0McZMddwioNDIQmBVXkDFVY1JIdTZRHVG2s18pTiw3-aNafTdn95u-7D-Y_7DTvcQCGBA5h9Oj714AKXjLwpOsm7dOimUPyeroBJaAPI9xsr2j7m6ZZzLLOskRAY9E_shx3GG_UG_sHb-oydCpSkPUIhtUiz1G-G4kNCvWL9p87sEZ/s1600/pagina%201.png');
+    background-size: cover;
+    background-position: center;
+    z-index: -1;
+    filter: blur(6px);
+    animation: zoomInOut 5s infinite alternate ease-in-out;
+}
+
+@keyframes zoomInOut {
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(1.1);
+    }
+}
+
+        /* Asegura que el body y html ocupen el 100% */
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: auto; 
+        }
+
+        /* Estilos para el botón de instalación */
+        #installButtonWrapper {
+            position: relative; 
+            top: 0; 
+            left: 50%; 
+            transform: translateX(-50%); 
+            z-index: 10; 
+        }
+
+        #installButton {
+            width: 190px; 
+            cursor: pointer; 
+            transition: transform 0.2s; 
+        }
+
+        #installButton:hover {
+            transform: scale(1.1); 
+        }
+
+        /* Estilos para los iconos de redes sociales */
+        .social-icons {
+            position: absolute;
+            right: 20px; 
+            top: 50%; 
+            transform: translateY(-50%); 
+            display: flex;
+            flex-direction: column; 
+            gap: 10px; 
+        }
+
+        .social-icon {
+            width: 40px; 
+            height: 40px; 
+            border-radius: 50%; 
+            object-fit: cover; 
+        }
+
+        /* Estilo para el modal del chat */
+        .chat-modal {
+            display: none; 
+            position: fixed;
+            top: 0; 
+            left: 0; 
+            width: 100vw; 
+            height: 100vh; 
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            transition: transform 0.5s ease;
+            transform: translateY(100%); 
+            z-index: 999;
+        }
+
+        .chat-modal.show {
+            display: block;
+            transform: translateY(0); 
+        }
+
+        .chat-modal iframe {
+            width: 100%; 
+            height: 100%; 
+            border: none;
+        }
+
+        .close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    border-radius: 500px;
+    background: #00000070;
+    font-size: 30px;
+    cursor: pointer;
+    z-index: 1000;
+}
+    </style>
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Mision Celestial - Radio 24 HRS" />
+    <meta property="og:description" content="Mision Celestial" />
+    <meta property="og:image" content="imagenes/logo.png" />
+    <meta property="og:url" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgVfgYQa-Not2csZDUK-g9yhW7Aj0WlA5m0NXB5Wi2c1l5L9g0RWluex0nQDKdxEYFG6ZvGtQ-tAVIEFexnYwcwld5WzpGFnFJpv8L7DAp3MAcFN7fsFsGB3hka08ZYDgRmP3xvUGdm6skfm8bkAX0eFFnq99_bFlGOAQGEJIismv1uxQZTBQ_n9W7kOBVI/s150/logo%20para%20pagina.png" />
+    <meta property="og:type" content="website" />
+</head>
+<body>
+    <div class="background-image"></div>
+    <video src="imagenes/background.png" autoplay muted loop></video>
+    <table width="100%" border="0" cellpadding="0" cellspacing="0">
+        <tr>
+            <td valign="top">
+                <table width="100%" border="0" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td width="50%">&nbsp;</td>
+                        <td width="50%" align="right">
+                            <div id="mySidebar" class="sidebar">
+                                <table width="100%" border="0" cellpadding="0" cellspacing="0">
+                                    <tr>
+                                        <td><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgVfgYQa-Not2csZDUK-g9yhW7Aj0WlA5m0NXB5Wi2c1l5L9g0RWluex0nQDKdxEYFG6ZvGtQ-tAVIEFexnYwcwld5WzpGFnFJpv8L7DAp3MAcFN7fsFsGB3hka08ZYDgRmP3xvUGdm6skfm8bkAX0eFFnq99_bFlGOAQGEJIismv1uxQZTBQ_n9W7kOBVI/s150/logo%20para%20pagina.png" class="pulse-logo" width="100%" height="auto"></td>
+                                    </tr>
+                                 
+                                    <tr>
+                                        
+                                        <td>
+                                            <table width="100%" border="0" cellpadding="0" cellspacing="10">
+                                                <tr>
+                                                    <td><a href="javascript:void(0);" onclick="closeNav();"><img src="imagenes/inicio.png" width="100%" height="auto" border="0"></a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><a href="tel:+57 3218142044" target="_blank"><img src="imagenes/llamanos.png" width="100%" height="auto" border="0"></a></td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><hr></td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <table width="100%" border="0" cellpadding="0" cellspacing="10">
+                                                <tr>
+                                                   
+                                                <tr>
+                                                    <td><a href="https://www.instagram.com/comun_icacionesplandevida/profilecard/?igsh=MTlpbjduMGtwOTBsbA== " target="_blank"><img src="imagenes/instagram.png" width="100%" height="auto" border="0"></a></td>
+                                                </tr>
+                                                <tr>
+                                                    
+                                                <tr>
+                                                    <td><a href="https://www.youtube.com/@comunicacionesplandevidapr4944" target="_blank"><img src="imagenes/Youtube.png" width="100%" height="auto" border="0"></a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><a href="https://business.facebook.com/latest/inbox/all/?nav_ref=manage_page_ap_plus_inbox_message_button&asset_id=113207663414098&business_id=673880777541353" target="_blank"><img src="imagenes/messenger.png" width="100%" height="auto" border="0"></a></td>
+                                                </tr>
+                                                <tr></tr>
+                                                    
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><hr></td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <table width="100%" border="0" cellpadding="0" cellspacing="10">
+                                                <tr>
+                                                    <td>
+                                                        <a href="https://www.facebook.com/sharer/sharer.php?u="https://estacion90sradio.com/" target="_blank">
+                                                            <img src="imagenes/compartirfacebook.png" class="pulse" width="100%" height="auto">
+                                                        </a>                                                         
+                                                        <a href="https://api.whatsapp.com/send?text=%c2%a1Hola!%20Te%20Invito%20a%20escuchar%20nuestra%20Emisora%20https://estacion90sradio.com/" target="_blank">
+                                                            <img src="imagenes/compartirwhatsapp.png" class="pulse" width="100%" height="auto">
+                                                        </a>                                                                                                              
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+
+                            <div id="main">
+                                <button class="openbtn" onClick="toggleNav()">
+                                    <img src="menu.png" alt="Menu" class="menu-icon">
+                                </button>                            
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td height="470" valign="top">
+              <div id="installButtonWrapper">
+                <img src="instalar.png" id="installButton" alt="Instalar App" />
+            </div>         
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+                <script src="js/lunaradio.min.js"></script>
+                <div id="lunaradio" style="width: 100%; height: 76vh;"></div>
+            </td>
+        </tr>
+    </table>
+
+    <div class="social-icons">
+        <a href="https://wa.link/zlc6ly" target="_blank">
+            <img src="iconos/whatsapp.png" class="social-icon" alt="WhatsApp">
+        </a>
+        <a href="https://www.facebook.com/NasaStereo" target="_blank">
+            <img src="iconos/facebook.png" class="social-icon" alt="Facebook">
+        </a>
+        
+   
+  
+
+    <div id="chatModal" class="chat-modal">
+        <span class="close" id="closeChat">&times;</span>
+        <iframe src="https://nexopanel.lat/chat/" frameborder="0"></iframe>
+    </div>
+
+    <script>
+        let deferredPrompt;
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            document.getElementById('installButtonWrapper').style.display = 'block'; // Muestra el botón
+        });
+
+        document.getElementById('installButton').addEventListener('click', () => {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                deferredPrompt.userChoice.then((choiceResult) => {
+                    if (choiceResult.outcome === 'accepted') {
+                        console.log('Usuario aceptó la instalación');
+                    } else {
+                        console.log('Usuario rechazó la instalación');
+                    }
+                });
+                deferredPrompt = null; // Resetea el prompt
+                document.getElementById('installButtonWrapper').style.display = 'none'; // Oculta el botón
+            }
+        });
+
+        // Lógica para abrir y cerrar el menú
+        function toggleNav() {
+            const sidebar = document.getElementById("mySidebar");
+            const main = document.getElementById("main");
+            
+            if (sidebar.style.width === "250px") {
+                closeNav();
+            } else {
+                openNav();
+            }
+        }
+
+        function openNav() {
+            document.getElementById("mySidebar").style.width = "250px";
+            document.getElementById("main").style.marginLeft = "250px";
+        }
+
+        function closeNav() {
+            document.getElementById("mySidebar").style.width = "0";
+            document.getElementById("main").style.marginLeft = "0";
+        }
+
+        // Cerrar el menú al hacer clic fuera de él
+        document.addEventListener('click', function(event) {
+            const sidebar = document.getElementById("mySidebar");
+            const button = document.querySelector('.openbtn');
+
+            if (sidebar.style.width === "250px" && !sidebar.contains(event.target) && !button.contains(event.target)) {
+                closeNav();
+            }
+        });
+
+        // Inicialización del reproductor
+        jQuery(document).ready(function($) {
+            $("#lunaradio").lunaradio({
+                userinterface: "big",
+                backgroundcolor: "transparent",
+                fontcolor: "#ffffff",
+                hightlightcolor: "#0c26b4",
+                fontname: "Poppins",
+	            googlefont: "Poppins&display=swap",
+	            fontratio: "0.6",
+                radioname: "Emisora Comunitaria Nasa Stereo",
+                scroll: "true",
+                coverimage: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgVfgYQa-Not2csZDUK-g9yhW7Aj0WlA5m0NXB5Wi2c1l5L9g0RWluex0nQDKdxEYFG6ZvGtQ-tAVIEFexnYwcwld5WzpGFnFJpv8L7DAp3MAcFN7fsFsGB3hka08ZYDgRmP3xvUGdm6skfm8bkAX0eFFnq99_bFlGOAQGEJIismv1uxQZTBQ_n9W7kOBVI/s150/logo%20para%20pagina.png",
+                onlycoverimage: "false",
+                coverstyle: "",
+                usevisualizer: "real",
+                visualizertype: "6",
+                multicolorvisualizer: "true",
+                color1: "#1e3ad5",
+                visualizeropacity: "0.0",
+                itunestoken: "1000lIPN",
+                metadatatechnic: "",
+                ownmetadataurl: "true",
+                metadata: "",
+                streamurl: "https://stream-159.zeno.fm/b98nefvxuxhvv?zt=eyJhbGciOiJIUzI1NiJ9.eyJzdHJlYW0iOiJiOThuZWZ2eHV4aHZ2IiwiaG9zdCI6InN0cmVhbS0xNTkuemVuby5mbSIsInJ0dGwiOjUsImp0aSI6IlpJOGh1Qm52UnpPQjBveHZ2VEJSUUEiLCJpYXQiOjE3NDE2MjMxMjMsImV4cCI6MTc0MTYyMzE4M30.fD8oLT6uSZoT2NmsPIIijQTemj-4vBOKz8uHK-ygAo4&adtonosListenerId=01JN6HGBJX2PEPYHE5B8EGVFAB;",
+                streamtype: "shoutcast2",
+                shoutcastpath: "/stream",
+                debug: "false",
+                autoplay: "true",
+                displayliveicon: "true",
+                displayvisualizericon: "true",
+            });
+        });
+
+
+ 
+
+        // Lógica para abrir y cerrar el chat modal
+        document.getElementById('chatIcon').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById('chatModal').classList.toggle('show');
+        });
+
+        document.getElementById('closeChat').addEventListener('click', function() {
+            document.getElementById('chatModal').classList.remove('show');
+        });
+    </script>
+    
+    
+    
+    <!-- Register Service Worker -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js')
+                    .then(reg => console.log('Service Worker registrado con éxito:', reg))
+                    .catch(err => console.log('Error al registrar el Service Worker:', err));
+            });
+        }
+        
+         
+   
+            $(".mobile-nav-toggle").click(function () {
+                $("body").toggleClass("mobile-nav-active");
+                $(".mobile-nav-toggle i").toggleClass("fa-bars fa-times");
+            });
+        </script>
+    </script>
+    <footer style="display:grid;align-content:end">
+        <div style="#3e3e94; color:#fff;text-align:center;padding:3px">
+            
+        </div>
+        <script>
+</body>
+
+
+</html>
